@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
-import logger from "./middleware/logger";
+// import logger from "./middleware/logger";
+import todoReducer from "./features/todo/todoSlice";
+import { baseApi } from "./api/api";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    todo: todoReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
-  middleware: (getDefaultMiddleware: any) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware: any) =>
+  //   getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware: any) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
   // devTools:false, // production deyar somoy eta false korle tarminal a redux er devtools dekhte parbe nah
 });
 
