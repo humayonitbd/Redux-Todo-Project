@@ -24,28 +24,37 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAddTodoMutation } from "@/redux/api/api";
 
 
 const AddTodoModal = () => {
   const [task, setTask] = useState('');
   const [priority, setPriority] = useState("low");
   const [description, setDescription] = useState('');
+// for local state managment
+  // const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch();
 
+  // for server
+  const [addTodo, {data,isLoading, isError,isSuccess}] = useAddTodoMutation();
+
+console.log(data, isLoading, isError, isSuccess);
   const onSubmit =(e:FormEvent)=>{
     e.preventDefault();
 
-    const randomString = Math.random().toString(36).substring(2, 7);
-    
+    // const randomString = Math.random().toString(36).substring(2, 7);
+
     const taskDetails = {
-      id: randomString,
       title: task,
-      description: description,
-      priority: priority,
+      isCompleted:false,
+      description,
+      priority,
     };
-    // console.log(taskDetails);
-    dispatch(addTodo(taskDetails));
+    console.log(taskDetails);
+    // for local state managment
+    // dispatch(addTodo(taskDetails));
+    //for server
+    addTodo(taskDetails);
   }
 
 

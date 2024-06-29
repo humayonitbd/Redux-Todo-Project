@@ -9,14 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useAppDispatch } from "@/redux/hook";
-import { priorityGetData } from "@/redux/features/todo/todoSlice";
+// import { useAppDispatch } from "@/redux/hook";
+// import { priorityGetData } from "@/redux/features/todo/todoSlice";
 
-const TodoFilter = () => {
-  const dispatch = useAppDispatch();
+const TodoFilter = ({setPriority}:any) => {
+  // const dispatch = useAppDispatch();
   const handlePriorityChange = (value:string) => {
-    dispatch(priorityGetData(value));
+    // dispatch(priorityGetData(value));
     // console.log(value,'value')
+    setPriority(value);
   };
   return (
     <DropdownMenu>
